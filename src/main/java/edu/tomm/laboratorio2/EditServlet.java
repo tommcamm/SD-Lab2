@@ -1,7 +1,7 @@
-package edu.tomm.Laboratorio02CS;
+package edu.tomm.laboratorio2;
 
-import edu.tomm.Laboratorio02CS.Exceptions.InvalidDataException;
-import edu.tomm.Laboratorio02CS.Repositories.Keyboard;
+import edu.tomm.laboratorio2.Exceptions.InvalidDataException;
+import edu.tomm.laboratorio2.Repositories.Keyboard;
 import org.dizitart.no2.Nitrite;
 import org.dizitart.no2.objects.Cursor;
 import org.dizitart.no2.objects.ObjectRepository;
@@ -14,18 +14,20 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 
-import static edu.tomm.Laboratorio02CS.RootServlet.DB_URL;
+import static edu.tomm.laboratorio2.RootServlet.DB_URL;
 
 @WebServlet(name = "EditServlet", value = "/edit/*")
 public class EditServlet extends HttpServlet {
+
+    private static final String EDIT_ATTR  = "editMode";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         if(request.getParameter("edit") != null && request.getParameter("edit").equals("1"))
-            request.setAttribute("editMode", 1);
+            request.setAttribute(EDIT_ATTR, 1);
         else
-            request.setAttribute("editMode", 0);
+            request.setAttribute(EDIT_ATTR, 0);
 
         try(Nitrite db = Nitrite.builder()
                 .compressed()
@@ -37,11 +39,11 @@ public class EditServlet extends HttpServlet {
             Keyboard kb = cursor.firstOrDefault();
 
             if (kb == null)
-                request.setAttribute("errorCode", 1);
+                request.setAttribute(EDIT_ATTR, 1);
             else
                 request.setAttribute("keyboard", kb);
         } catch (NumberFormatException | NullPointerException e){
-            request.setAttribute("errorCode", 1);
+            request.setAttribute(EDIT_ATTR, 1);
         }
 
         request.setAttribute("layouts", Keyboard.layoutList());
@@ -65,7 +67,7 @@ public class EditServlet extends HttpServlet {
                 keyboardStore.update(kb);
 
             } catch (InvalidDataException | NumberFormatException e) {
-                request.setAttribute("errorCode", 2);
+                request.setAttribute(EDIT_ATTR, 2);
             }
 
         } else if (request.getParameter("op") != null && request.getParameter("op").equals("1")){
@@ -84,7 +86,7 @@ public class EditServlet extends HttpServlet {
                 );
                 keyboardStore.update(kb);
             } catch (InvalidDataException | NumberFormatException e) {
-                request.setAttribute("errorCode", 2);
+                request.setAttribute(EDIT_ATTR, 2);
             }
         }
 

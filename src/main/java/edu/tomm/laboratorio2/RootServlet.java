@@ -1,7 +1,7 @@
-package edu.tomm.Laboratorio02CS;
+package edu.tomm.laboratorio2;
 
-import edu.tomm.Laboratorio02CS.Repositories.Keyboard;
-import edu.tomm.Laboratorio02CS.Exceptions.InvalidDataException;
+import edu.tomm.laboratorio2.Repositories.Keyboard;
+import edu.tomm.laboratorio2.Exceptions.InvalidDataException;
 import org.dizitart.no2.FindOptions;
 import org.dizitart.no2.Nitrite;
 import org.dizitart.no2.SortOrder;

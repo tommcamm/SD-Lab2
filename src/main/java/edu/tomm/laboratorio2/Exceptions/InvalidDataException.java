@@ -1,4 +1,4 @@
-package edu.tomm.Laboratorio02CS.Exceptions;
+package edu.tomm.laboratorio2.Exceptions;
 
 public class InvalidDataException extends Exception{
 

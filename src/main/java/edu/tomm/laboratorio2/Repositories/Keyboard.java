@@ -1,6 +1,6 @@
-package edu.tomm.Laboratorio02CS.Repositories;
+package edu.tomm.laboratorio2.Repositories;
 
-import edu.tomm.Laboratorio02CS.Exceptions.InvalidDataException;
+import edu.tomm.laboratorio2.Exceptions.InvalidDataException;
 import org.dizitart.no2.IndexType;
 import org.dizitart.no2.objects.Id;
 import org.dizitart.no2.objects.Index;
